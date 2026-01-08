@@ -12,6 +12,7 @@ I am an **aspiring AI Product Manager** with hands-on exposure to **Agentic AI c
 
 This repository contains projects and experiments from my learning journey in AI Product Management:
 
+- **Resume/**: My professional resume and CV documents showcasing my experience and skills
 - **Final Project Sem 1/**: Final project deliverables from Semester 1
 - **Sem 1 Mini projects/**: A collection of mini-projects exploring various concepts
   - **Product opportunity discovery/**: Research and analysis on identifying product opportunities
