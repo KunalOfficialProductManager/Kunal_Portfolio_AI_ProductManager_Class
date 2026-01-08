@@ -1,0 +1,56 @@
+Gemini 
+You are a cinematic concept artist. I would like you to create a dramatic graphite pencil sketch of a cowboy hero standing in a desert sand field. The cowboy wears a cowboy hat, his head slightly tilted, confidently touching the brim with two fingers. In his opposite hand, he holds a short double-barrel gun aimed downward. The sun sits directly behind his head, hidden, producing a powerful glowing halo/aura around him. Slightly behind the cowboy, a black, shiny horse rears up on its hind legs, adding motion and strength to the scene. The entire figure must be visible in a wide landscape frame. Medium: pencil sketch. Material: graphite. Lighting: bright daylight with strong backlighting. Mood: heroic, bold, legendary. Color palette: grayscale, sketch textures, expressive pencil strokes, high contrast highlights and shadows.
+
+Link :- https://gemini.google.com/share/568ee06c385d
+
+Chat GPT 
+Role / Perspective
+You are a professional concept artist creating a cinematic hero illustration.
+
+Prompt:
+Create a heroic full-body pencil sketch of a cowboy standing in a vast sandy desert field. The cowboy wears a classic cowboy hat. His head is slightly tilted, and with two fingers of one hand, he confidently touches the brim of his hat in a heroic pose.
+
+In his other hand, he holds a short double-barrel shotgun, pointed downward toward the ground, relaxed but powerful.
+
+The sun is positioned directly behind the cowboy’s head, completely hidden by it, forming a strong glowing halo / aura of light around his silhouette. The backlighting is intense and dramatic, emphasizing the hero figure.
+
+A black, shiny horse stands slightly behind the cowboy, rearing up on its hind legs, adding motion and intensity to the scene.
+
+The composition is cinematic and landscape-oriented, with the entire body of the cowboy visible in frame.
+
+Medium: Pencil sketch
+Material: Graphite
+Style: Heroic, cinematic, western concept art
+Lighting: Bright daytime sunlight, strong backlight, dramatic rim glow
+Color Palette: Grayscale only
+Texture & Shading: Rough pencil strokes, sketch-like textures, high contrast shading, detailed line work, strong silhouette emphasis
+
+Mood: Confident, legendary, lone hero of the frontier
+Camera Framing: Wide shot, full figure, cinematic depth
+
+Link :- https://chatgpt.com/s/m_695e07df4d448191bb8e5cb3e09563c8
+
+Claude Ai 
+You are an expert laser engraving artist specializing in wooden portrait plaques. I want you to help me design a laser-engraved image for a wooden board measuring 15 cm (height) × 10 cm (width) in portrait orientation. The board must have rounded corners with a 15 mm radius on all sides. Add an ornamental floral vine border around the edges, covering 20% of the board, while 80% of the central area contains the engraved portrait based on the image I provide. The portrait should be heroic, full body visible, and composed vertically. Medium: laser engraving on wood. Material: natural wooden board. Style: heroic portrait. Lighting: daytime with a shiny sun feel expressed through engraving contrast. Color palette: grayscale, pencil-sketch / etched look suitable for laser engraving. At the bottom, engrave the text:Having a brother like you is one of life's greeatest blessiing And directly below it, in bold engraved text:
+`Happy Birthday Bhai ❤️❤️`
+Make sure the text is well-balanced, legible, and engraved cleanly into the wood.
+
+Link :- https://claude.ai/public/artifacts/4dca2dc8-882c-42a7-bea9-0025fa66e7c9
+
+
+Perplexity 
+SectionPrompt
+Prompt
+Act as a laser engraving production designer. I need a print-ready engraved artwork layout designed specifically for a wooden plaque sized 15 cm tall and 10 cm wide, portrait format. The board must have rounded corners with a 15 mm radius. Create a decorative floral border along the edges, occupying 20% of the surface area, leaving 80% for the engraved image in the center. The central image should replicate the provided reference image, engraved in a heroic portrait style with the entire figure visible. Medium: laser engraving. Material: wood. Lighting interpretation: daylight with a shiny sun effect represented through engraved highlights and contrast. Color & finish: grayscale, graphite-style sketch, laser-etch optimized shading. At the bottom of the plaque, engrave the following text exactly:
+Having a brother like you is one of life's greatest blessings
+Below that, engrave in bold:
+Happy Birthday Bhai ❤️❤️
+Ensure all elements are optimized for laser engraving clarity and wood texture visibility.
+
+Link :- https://www.perplexity.ai/search/sectionprompt-prompt-act-as-a-G2j75MwcQoyPJ_CBZhd20Q#0
+
+
+Chat GPT 
+ You are a professional **wood engraving and laser art designer**. I need you to create a **portrait-oriented image design** intended for **laser engraving on a wooden board** with **exact dimensions: 15 cm height × 10 cm width**. The wooden board must have **rounded corners with a 15 mm border radius on all sides**. Around the edges of the board, create a **decorative floral vine border** that occupies **approximately 20% of the surface**, leaving **80% of the central wood area** for the engraved image. In the central 80% area, engrave the **provided reference image** in a **heroic portrait composition**, showing the **full person in frame**. **Medium:** laser engraving on wood. **Material:** wooden board. **Lighting style:** daytime lighting with a shiny sun effect translated into engraved highlights. **Color & palette:** grayscale, sketch-like, etched graphite appearance suitable for laser engraving. At the **bottom of the wooden board**, engrave the following text exactly as written: `Having a brother like you is one of life's greeatest blessiing`Below this line, engrave in **bold lettering**:`Happy Birthday Bhai ❤️❤️` Ensure the typography is clean, centered, and suitable for laser engraving.
+ 
+ Link :- https://chatgpt.com/s/m_695e0843760c8191a726acc718cdc891

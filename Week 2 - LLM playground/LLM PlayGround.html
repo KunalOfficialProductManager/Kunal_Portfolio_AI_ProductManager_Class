@@ -1,0 +1,823 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Fine-Tuning Playground - Learning Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        .section {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            font-family: inherit;
+            min-height: 80px;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        button:hover:not(:disabled) {
+            background: #5568d3;
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .status {
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .slider-container {
+            margin-bottom: 20px;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .slider-label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .slider-value {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            border: none;
+        }
+
+        .slider-help {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .radio-option:hover {
+            border-color: #667eea;
+            background: #f0f3ff;
+        }
+
+        .radio-option input[type="radio"] {
+            margin-right: 10px;
+            width: auto;
+        }
+
+        .radio-option.selected {
+            border-color: #667eea;
+            background: #f0f3ff;
+        }
+
+        .output-box {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 6px;
+            min-height: 200px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .output-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 6px;
+            font-size: 0.9em;
+        }
+
+        .educational-section {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+            padding: 30px;
+        }
+
+        .educational-section h3 {
+            color: #856404;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .educational-section p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .educational-section strong {
+            color: #856404;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .number-input {
+            width: 80px;
+            padding: 5px;
+        }
+
+        .flex-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 LLM Fine-Tuning Playground</h1>
+        <p class="subtitle">Learn how inference controls work in Large Language Models</p>
+
+        <!-- API Key Setup -->
+        <div class="section">
+            <h2 class="section-title">🔐 API Key Setup</h2>
+            <div class="input-group">
+                <label for="apiKey">Enter Your Gemini API Key:</label>
+                <input type="password" id="apiKey" placeholder="AIza...">
+                <small style="display: block; margin-top: 5px; color: #666;">
+                    Get your free API key at <a href="https://makersuite.google.com/app/apikey" target="_blank">Google AI Studio</a>
+                </small>
+            </div>
+            <button id="validateBtn" onclick="validateApiKey()">Validate API Key</button>
+            <div id="validationStatus"></div>
+        </div>
+
+        <!-- Model Selection -->
+        <div class="section" id="modelSection" style="display: none;">
+            <h2 class="section-title">🧠 Model Selection</h2>
+            <div class="input-group">
+                <label for="modelSelect">Choose a Model:</label>
+                <select id="modelSelect">
+                    <option value="">Loading models...</option>
+                </select>
+                <small style="display: block; margin-top: 5px; color: #666;">
+                    The playground will automatically fall back to a working model if your selection fails
+                </small>
+            </div>
+        </div>
+
+        <!-- Response Style Presets -->
+        <div class="section" id="presetsSection" style="display: none;">
+            <h2 class="section-title">🎭 Response Style</h2>
+            <p style="margin-bottom: 15px; color: #666;">Choose a preset to auto-populate instructions and parameters:</p>
+            <div class="radio-group" id="presetRadios"></div>
+        </div>
+
+        <!-- Hyperparameter Controls -->
+        <div class="section" id="controlsSection" style="display: none;">
+            <h2 class="section-title">🎛️ Model Controls (Inference Tuning)</h2>
+            
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span class="slider-label">Temperature</span>
+                    <div class="slider-value">
+                        <input type="number" id="tempValue" class="number-input" min="0" max="1.5" step="0.1" value="0.7">
+                    </div>
+                </div>
+                <input type="range" id="tempSlider" min="0" max="1.5" step="0.1" value="0.7">
+                <div class="slider-help">Controls creativity and randomness. Higher = more creative and unpredictable.</div>
+            </div>
+
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span class="slider-label">Top-P (Nucleus Sampling)</span>
+                    <div class="slider-value">
+                        <input type="number" id="toppValue" class="number-input" min="0" max="1" step="0.05" value="0.9">
+                    </div>
+                </div>
+                <input type="range" id="toppSlider" min="0" max="1" step="0.05" value="0.9">
+                <div class="slider-help">Controls diversity by considering only the top % of probable words.</div>
+            </div>
+
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span class="slider-label">Top-K</span>
+                    <div class="slider-value">
+                        <input type="number" id="topkValue" class="number-input" min="1" max="100" step="1" value="40">
+                    </div>
+                </div>
+                <input type="range" id="topkSlider" min="1" max="100" step="1" value="40">
+                <div class="slider-help">Limits consideration to the top K most probable words at each step.</div>
+            </div>
+
+            <div class="slider-container">
+                <div class="slider-header">
+                    <span class="slider-label">Max Output Tokens</span>
+                    <div class="slider-value">
+                        <input type="number" id="maxtokensValue" class="number-input" min="50" max="2048" step="50" value="500">
+                    </div>
+                </div>
+                <input type="range" id="maxtokensSlider" min="50" max="2048" step="50" value="500">
+                <div class="slider-help">Maximum length of the response (approximate number of words × 1.3).</div>
+            </div>
+        </div>
+
+        <!-- Instruction & Prompt -->
+        <div class="section" id="promptSection" style="display: none;">
+            <h2 class="section-title">🧠 Instruction & Prompt</h2>
+            
+            <div class="input-group">
+                <label for="systemPrompt">System / Instruction Prompt (Behavior Steering):</label>
+                <textarea id="systemPrompt" rows="4" placeholder="Instructions that guide how the model should behave..."></textarea>
+            </div>
+
+            <div class="input-group">
+                <label for="userPrompt">User Prompt (Your Question):</label>
+                <textarea id="userPrompt" rows="3" placeholder="What do you want to ask?">Explain quantum computing in simple terms.</textarea>
+            </div>
+
+            <button id="runBtn" onclick="runPrompt()">Run Prompt</button>
+        </div>
+
+        <!-- Output -->
+        <div class="section" id="outputSection" style="display: none;">
+            <h2 class="section-title">📤 Model Output</h2>
+            <div class="output-meta" id="outputMeta" style="display: none;">
+                <span id="modelUsed"></span>
+                <span id="latency"></span>
+            </div>
+            <div class="output-box" id="output">Output will appear here...</div>
+        </div>
+
+        <!-- Educational Footer -->
+        <div class="section educational-section">
+            <h2 class="section-title">📘 Understanding Fine-Tuning (Simple Explanation)</h2>
+            
+            <h3>What is Temperature? 🌡️</h3>
+            <p>
+                Imagine you're choosing ice cream flavors. With <strong>low temperature (0.0-0.3)</strong>, 
+                you always pick vanilla because it's the most popular choice. With <strong>high temperature (0.8-1.5)</strong>, 
+                you might pick rocky road, mint chip, or even try unusual combinations! Temperature controls how 
+                "adventurous" the model is when picking the next word.
+            </p>
+
+            <h3>What are Top-P and Top-K? 🎯</h3>
+            <p>
+                <strong>Top-K</strong> is like saying "I'll only choose from the 40 most popular ice cream flavors." 
+                You ignore all the rare ones. <strong>Top-P</strong> is more flexible—it says "I'll choose from 
+                enough flavors until I've covered 90% of what people usually pick." Both help control how wild 
+                or predictable the model's choices are.
+            </p>
+
+            <h3>Why This Playground is NOT Real Fine-Tuning 🔧</h3>
+            <p>
+                What you're doing here is like <strong>giving someone instructions and changing their mood</strong>. 
+                You're saying "be creative!" or "be factual!" but the person's core knowledge hasn't changed. 
+                <strong>Real fine-tuning</strong> is like sending someone to medical school for 4 years—you're 
+                actually updating their brain with new knowledge and skills through extensive training.
+            </p>
+
+            <h3>Three Different Approaches 🎓</h3>
+            <p>
+                <strong>1. Prompt Engineering:</strong> Writing better instructions. Like saying "explain this as if 
+                I'm 10 years old" or "list pros and cons." You're just asking better questions.
+            </p>
+            <p>
+                <strong>2. Inference Tuning (what we do here):</strong> Adjusting temperature, top-p, top-k. 
+                Like changing someone's mood—making them more careful or more creative in the moment.
+            </p>
+            <p>
+                <strong>3. Real Fine-Tuning:</strong> Retraining the model on specific data. Like teaching someone 
+                a new skill through practice. This actually modifies the model's "brain" and requires significant 
+                computational resources and training data.
+            </p>
+
+            <h3>What Are API Keys? 🔑</h3>
+            <p>
+                An API key is like a password that lets you use Google's AI services. It tracks your usage and 
+                keeps your account secure. <strong>Never share your API key publicly!</strong> Anyone with your 
+                key could use it to access the service under your account. Think of it like your house key—you 
+                wouldn't post it on social media!
+            </p>
+
+            <h3>The Bottom Line 💡</h3>
+            <p>
+                This playground helps you understand that most "AI customization" you see is actually just 
+                clever prompting and parameter tweaking—not true fine-tuning. Real fine-tuning is expensive, 
+                time-consuming, and requires machine learning expertise. But for many tasks, smart prompting 
+                and parameter adjustment (what you're learning here) works great!
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Global state
+        let apiKey = '';
+        let isValidated = false;
+        let availableModels = [];
+        let fallbackModels = ['gemini-1.5-flash', 'gemini-1.5-pro', 'gemini-pro'];
+
+        // Presets configuration
+        const presets = {
+            innovative: {
+                name: 'Innovative Thinker',
+                temperature: 1.2,
+                topP: 0.95,
+                topK: 60,
+                instruction: 'You are an innovative thinker who loves exploring creative solutions and thinking outside the box. Generate novel ideas, make unexpected connections, and encourage creative problem-solving. Be bold and imaginative in your responses.'
+            },
+            factual: {
+                name: 'Factual & Precise',
+                temperature: 0.2,
+                topP: 0.8,
+                topK: 20,
+                instruction: 'You are a precise, factual assistant who values accuracy above all. Provide clear, concise, and well-sourced information. Avoid speculation and stick to established facts. Use formal language and cite when appropriate.'
+            },
+            funny: {
+                name: 'Funny Kid (8-10 years old)',
+                temperature: 1.0,
+                topP: 0.9,
+                topK: 50,
+                instruction: 'You are a funny, energetic kid between 8-10 years old! You love jokes, silly puns, and making everything fun. Use simple words, get excited about stuff, and add playful exclamations! But you still try to be helpful (in your own goofy way).'
+            },
+            pm: {
+                name: 'Informed Product Manager',
+                temperature: 0.5,
+                topP: 0.85,
+                topK: 35,
+                instruction: 'You are an experienced product manager who thinks strategically about user needs, business goals, and technical constraints. Structure your responses with clear frameworks, consider trade-offs, and focus on actionable insights. Be professional and goal-oriented.'
+            },
+            noNonsense: {
+                name: 'No-Nonsense Fact Teller',
+                temperature: 0.1,
+                topP: 0.7,
+                topK: 15,
+                instruction: 'You tell it like it is. No fluff, no filler, no unnecessary politeness. Get straight to the point. Short sentences. Clear facts. If something is wrong, you say so directly. Efficiency over eloquence.'
+            },
+            custom: {
+                name: 'Custom',
+                temperature: 0.7,
+                topP: 0.9,
+                topK: 40,
+                instruction: 'You are a helpful AI assistant. Customize this instruction and the parameters above to create your own response style!'
+            }
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSliders();
+            createPresetRadios();
+            loadPreset('factual'); // Default preset
+        });
+
+        // Setup slider synchronization
+        function setupSliders() {
+            const sliders = [
+                { slider: 'tempSlider', value: 'tempValue' },
+                { slider: 'toppSlider', value: 'toppValue' },
+                { slider: 'topkSlider', value: 'topkValue' },
+                { slider: 'maxtokensSlider', value: 'maxtokensValue' }
+            ];
+
+            sliders.forEach(({ slider, value }) => {
+                const sliderEl = document.getElementById(slider);
+                const valueEl = document.getElementById(value);
+
+                sliderEl.addEventListener('input', (e) => {
+                    valueEl.value = e.target.value;
+                });
+
+                valueEl.addEventListener('input', (e) => {
+                    const val = parseFloat(e.target.value);
+                    const min = parseFloat(sliderEl.min);
+                    const max = parseFloat(sliderEl.max);
+                    if (val >= min && val <= max) {
+                        sliderEl.value = val;
+                    }
+                });
+            });
+        }
+
+        // Create preset radio buttons
+        function createPresetRadios() {
+            const container = document.getElementById('presetRadios');
+            Object.keys(presets).forEach((key, index) => {
+                const preset = presets[key];
+                const div = document.createElement('div');
+                div.className = 'radio-option';
+                div.innerHTML = `
+                    <input type="radio" name="preset" id="preset_${key}" value="${key}" ${index === 1 ? 'checked' : ''}>
+                    <label for="preset_${key}" style="cursor: pointer; margin: 0;">${preset.name}</label>
+                `;
+                div.onclick = () => {
+                    document.getElementById(`preset_${key}`).checked = true;
+                    loadPreset(key);
+                    updateRadioStyles();
+                };
+                container.appendChild(div);
+            });
+            updateRadioStyles();
+        }
+
+        // Update radio button styles
+        function updateRadioStyles() {
+            document.querySelectorAll('.radio-option').forEach(option => {
+                const radio = option.querySelector('input[type="radio"]');
+                if (radio.checked) {
+                    option.classList.add('selected');
+                } else {
+                    option.classList.remove('selected');
+                }
+            });
+        }
+
+        // Load preset values
+        function loadPreset(presetKey) {
+            const preset = presets[presetKey];
+            document.getElementById('tempSlider').value = preset.temperature;
+            document.getElementById('tempValue').value = preset.temperature;
+            document.getElementById('toppSlider').value = preset.topP;
+            document.getElementById('toppValue').value = preset.topP;
+            document.getElementById('topkSlider').value = preset.topK;
+            document.getElementById('topkValue').value = preset.topK;
+            document.getElementById('systemPrompt').value = preset.instruction;
+        }
+
+        // Validate API Key
+        async function validateApiKey() {
+            const keyInput = document.getElementById('apiKey');
+            apiKey = keyInput.value.trim();
+            const statusDiv = document.getElementById('validationStatus');
+            const validateBtn = document.getElementById('validateBtn');
+
+            if (!apiKey) {
+                showStatus(statusDiv, 'error', 'Please enter an API key');
+                return;
+            }
+
+            validateBtn.disabled = true;
+            validateBtn.innerHTML = 'Validating... <span class="loading"></span>';
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+                const data = await response.json();
+
+                if (response.ok && data.models) {
+                    isValidated = true;
+                    showStatus(statusDiv, 'success', '✓ API Key Valid! Loading models...');
+                    availableModels = data.models
+                        .filter(m => m.supportedGenerationMethods && m.supportedGenerationMethods.includes('generateContent'))
+                        .map(m => m.name.replace('models/', ''));
+                    
+                    populateModels();
+                    showSections();
+                    validateBtn.innerHTML = 'Validated ✓';
+                } else {
+                    throw new Error(data.error?.message || 'Invalid API key or unable to list models');
+                }
+            } catch (error) {
+                isValidated = false;
+                showStatus(statusDiv, 'error', `✗ Validation failed: ${error.message}. Please check your API key and try again.`);
+                validateBtn.disabled = false;
+                validateBtn.innerHTML = 'Validate API Key';
+            }
+        }
+
+        // Populate model dropdown
+        function populateModels() {
+            const select = document.getElementById('modelSelect');
+            select.innerHTML = '';
+
+            if (availableModels.length === 0) {
+                select.innerHTML = '<option value="">No models available - will use fallback</option>';
+                return;
+            }
+
+            availableModels.forEach(model => {
+                const option = document.createElement('option');
+                option.value = model;
+                option.textContent = model;
+                select.appendChild(option);
+            });
+
+            // Select first model by default
+            if (availableModels.length > 0) {
+                select.value = availableModels[0];
+            }
+        }
+
+        // Show all sections after validation
+        function showSections() {
+            document.getElementById('modelSection').style.display = 'block';
+            document.getElementById('presetsSection').style.display = 'block';
+            document.getElementById('controlsSection').style.display = 'block';
+            document.getElementById('promptSection').style.display = 'block';
+            document.getElementById('outputSection').style.display = 'block';
+        }
+
+        // Run the prompt
+        async function runPrompt() {
+            if (!isValidated) {
+                alert('Please validate your API key first');
+                return;
+            }
+
+            const userPrompt = document.getElementById('userPrompt').value.trim();
+            const systemPrompt = document.getElementById('systemPrompt').value.trim();
+            
+            if (!userPrompt) {
+                alert('Please enter a user prompt');
+                return;
+            }
+
+            const runBtn = document.getElementById('runBtn');
+            const output = document.getElementById('output');
+            const outputMeta = document.getElementById('outputMeta');
+
+            runBtn.disabled = true;
+            runBtn.innerHTML = 'Running... <span class="loading"></span>';
+            output.textContent = 'Generating response...';
+            outputMeta.style.display = 'none';
+
+            const temperature = parseFloat(document.getElementById('tempValue').value);
+            const topP = parseFloat(document.getElementById('toppValue').value);
+            const topK = parseInt(document.getElementById('topkValue').value);
+            const maxTokens = parseInt(document.getElementById('maxtokensValue').value);
+            const selectedModel = document.getElementById('modelSelect').value || fallbackModels[0];
+
+            const startTime = Date.now();
+
+            try {
+                const result = await generateContent(selectedModel, systemPrompt, userPrompt, {
+                    temperature,
+                    topP,
+                    topK,
+                    maxTokens
+                });
+
+                const latency = ((Date.now() - startTime) / 1000).toFixed(2);
+
+                output.textContent = result.text;
+                document.getElementById('modelUsed').textContent = `Model: ${result.modelUsed}`;
+                document.getElementById('latency').textContent = `Latency: ${latency}s`;
+                outputMeta.style.display = 'flex';
+
+                if (result.usedFallback) {
+                    showStatus(output, 'info', `Note: The selected model failed. Automatically used "${result.modelUsed}" instead. This often happens due to quota limits or model permissions.`);
+                }
+            } catch (error) {
+                output.textContent = `Error: ${error.message}\n\nTroubleshooting tips:\n- Check if your API key has quota remaining\n- Try a different model from the dropdown\n- Verify your API key has the necessary permissions\n- Reduce max tokens if the request is too large`;
+                output.style.color = '#ff6b6b';
+            }
+
+            runBtn.disabled = false;
+            runBtn.innerHTML = 'Run Prompt';
+        }
+
+        // Generate content with fallback logic
+        async function generateContent(modelName, systemPrompt, userPrompt, params) {
+            const modelsToTry = [modelName, ...fallbackModels].filter((v, i, a) => a.indexOf(v) === i);
+            let lastError = null;
+
+            for (let i = 0; i < modelsToTry.length; i++) {
+                const model = modelsToTry[i];
+                try {
+                    const result = await callGeminiAPI(model, systemPrompt, userPrompt, params);
+                    return {
+                        text: result,
+                        modelUsed: model,
+                        usedFallback: i > 0
+                    };
+                } catch (error) {
+                    lastError = error;
+                    if (i === modelsToTry.length - 1) {
+                        throw new Error(`All models failed. Last error: ${error.message}`);
+                    }
+                }
+            }
+        }
+
+        // Call Gemini API
+        async function callGeminiAPI(model, systemPrompt, userPrompt, params) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+            
+            const parts = [];
+            if (systemPrompt) {
+                parts.push({ text: systemPrompt + "\n\n" });
+            }
+            parts.push({ text: userPrompt });
+
+            const body = {
+                contents: [{
+                    parts: parts
+                }],
+                generationConfig: {
+                    temperature: params.temperature,
+                    topP: params.topP,
+                    topK: params.topK,
+                    maxOutputTokens: params.maxTokens
+                }
+            };
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error?.message || 'API request failed');
+            }
+
+            if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+                throw new Error('No response generated by the model');
+            }
+
+            return data.candidates[0].content.parts[0].text;
+        }
+
+        // Show status message
+        function showStatus(element, type, message) {
+            element.innerHTML = `<div class="status ${type}">${message}</div>`;
+        }
+    </script>
+</body>
+</html>
+```
