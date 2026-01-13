@@ -1,0 +1,71 @@
+You are a professional storyboard creator for a health-tech product pitch.
+
+
+
+Your task is to create a compelling, end-to-end visual storyboard for the **Nutrition Tracker module** of a health domain application called **Hibiscus Health**.
+
+
+
+The storyboard should be based on the following user story and structured into clear scenes (Scene 1, Scene 2, etc.). Each scene must include:
+
+- Scene title
+
+- Visual description (what is shown on screen)
+
+- Character emotions
+
+- Key on-screen text or captions
+
+- Transition to the next scene
+
+
+
+USER STORY CONTEXT:
+
+Vectoria is a 29-year-old woman diagnosed with Type 2 diabetes. She weighs 230 lbs and struggles daily with low energy, health issues, and balancing her job and family life. She wants to live a healthier life through good nutrition and a balanced diet but finds personal trainers and dietitians too expensive.
+
+
+
+She wants a simple way to track calories and understand what she eats in every meal. Her friend Vanessa introduces her to the Hibiscus Health application.
+
+
+
+Through the app’s **Nutrition Tracker module**, Vectoria:
+
+- Logs meals and beverages
+
+- Takes photos of her food to automatically analyze calories and nutrition
+
+- Gets a detailed meal breakdown
+
+- Receives guidance from an assigned professional dietitian through a low-cost subscription
+
+- Uses an in-app AI chatbot called **AskHiby** for instant nutrition questions
+
+
+
+Over time, her data is analyzed by the dietitian, her meal planning improves, she loses weight, controls her diabetes, regains confidence, and feels energized throughout the day. The Nutrition Tracker becomes her personal meal manager. She is now happy, healthy, productive, and starts recommending the app to her friends.
+
+
+
+STORYBOARD GOAL:
+
+Create an emotionally engaging, inspirational storyboard that clearly communicates:
+
+- The user problem
+
+- The solution through the Nutrition Tracker module
+
+- The transformation and positive outcome
+
+- The value of connecting users with dietitians
+
+
+
+Tone: Hopeful, empathetic, modern, and trustworthy  
+
+Target audience: Company board members and stakeholders  
+
+End the storyboard with a strong visual of confidence, health, and referral growth.
+
+Link :- https://gemini.google.com/share/c46c1d5404bb
